@@ -31,11 +31,12 @@
         </div>
 
         <!-- Search Section -->
-        <form class="sm:w-3/4 w-full sm:px-10 px-4 flex mt-4 " action="">
-            <input type="search"
+        <form action="/" method="GET" class="sm:w-3/4 w-full sm:px-10 px-4 flex mt-4">
+            @csrf
+            <input type="search" name="search"
                 class="w-full p-2 px-4 bg-white shadow-md text-sm border outline-none border-blue-300 rounded-s-md focus:border-blue-600"
                 placeholder="Cari Barang" />
-            <button class="bg-blue-600 text-white py-2 px-4 rounded-e-md shadow-md">Cari</button>
+            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-e-md shadow-md">Cari</button>
         </form>
 
         <!-- Products Section -->
@@ -58,7 +59,7 @@
 
         <!-- Load More Button -->
         <div class="flex justify-center mt-6">
-            <button class="bg-blue-500 text-white py-2 px-6 rounded-lg">Lebih Banyak</button>
+            {{ $produk->links() }}
         </div>
 
         <!-- Contact Section -->

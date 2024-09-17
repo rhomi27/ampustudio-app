@@ -10,10 +10,16 @@ use Illuminate\Http\Request;
 class ViewController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Ampu Studio';
-        $produk = Product::latest()->get();
+
+        $query = $request->input('search'); 
+        if ($query) {
+            $produk = Product::where('name', 'LIKE', '%' . $query . '%')->paginate(6);
+        } else {
+            $produk = Product::paginate(6); 
+        }
         $contact = Contact::first();
         return view("index", compact('title','produk','contact'));
     }
