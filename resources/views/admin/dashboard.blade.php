@@ -37,6 +37,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/node_modules/flowbite/dist/flowbite.js"></script>
+    
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
     

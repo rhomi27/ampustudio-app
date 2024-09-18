@@ -72,9 +72,12 @@
                 </div>
                 <!-- Contact Information -->
                 <div class="flex flex-col gap-2 font-bold text-lg bg-white shadow-md border-gray-200 border p-5 md:px-10">
-                    <p>WhatsApp : <span class="font-normal">{{ $contact->whatsapp }}</span></p>
-                    <p>Email : <span class="font-normal">{{ $contact->email }}</span></p>
-                    <p>Instagram : <span class="font-normal">{{ $contact->instagram }}</span></p>
+                    <p>WhatsApp : <a href="https://wa.me/{{ $contact->whatsapp }}">
+                        <span class="font-normal">{{ $contact->whatsapp }}</span>
+                    </a>
+                    </p>
+                    <p>Email : <a href="mailto:{{ $contact->email }}"><span class="font-normal">{{ $contact->email }}</span></a></p>
+                    <p>Instagram : <a href="https://www.instagram.com/{{ $contact->instagram }}"><span class="font-normal">{{ $contact->instagram }}</span></a></p>
                 </div>
             </div>
         </section>

@@ -74,8 +74,7 @@
                                 <td class="line-clamp-2">{{ $p->deskripsi }}</td>
                                 <td>
                                     <div class="flex gap-2">
-                                        <a href=""
-                                            class="bg-blue-500 p-1 px-2 rounded-md text-white">Detail</a>
+                                        
                                         <a href="/admin/editproduk={{ $p->id }}"
                                             class="bg-green-500 p-1 px-2 rounded-md text-white">Edit</a>
 
