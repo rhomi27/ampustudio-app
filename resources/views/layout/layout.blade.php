@@ -12,7 +12,7 @@
 <body>
     @include('sweetalert::alert')
     @yield('content')
-    <script src="{{ asset('js/datatables.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/flowbite.js') }}"></script>
     @stack('script')
 </body>

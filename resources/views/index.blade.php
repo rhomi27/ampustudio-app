@@ -1,12 +1,12 @@
 @extends('layout.layout')
 @section('content')
-<style>
-    .h-80 iframe {
-        width: 100%;
-        height: 100%;
-        border: 0; 
-    }
-</style>
+    <style>
+        .h-80 iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
 
     {{-- header --}}
     <nav
@@ -19,7 +19,7 @@
         <!-- Banner -->
         <div class="flex flex-col md:flex-row w-full h-auto md:h-[75vh] gap-4 p-6 md:p-10 bg-white">
             <div class="w-full md:w-1/2 flex justify-center items-center">
-                <img class="w-full h-full object-contain" src="{{ asset('img/lighting 1.png') }}" alt="Banner Image">
+                <img class="w-full h-full object-contain rounded-full" src="{{ asset('img/logo.jpg') }}" alt="Banner Image">
             </div>
             <div class="w-full md:w-1/2 flex justify-center items-center md:p-28">
                 <div class="bg-blue-300  p-8 md:p-12 rounded-full text-center">
@@ -68,16 +68,18 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 p-10">
                 <!-- GPS Map -->
                 <div class="bg-gray-300 h-80">
-                        {!! $contact->iframe_maps !!}
+                    {!! $contact->iframe_maps !!}
                 </div>
                 <!-- Contact Information -->
                 <div class="flex flex-col gap-2 font-bold text-lg bg-white shadow-md border-gray-200 border p-5 md:px-10">
                     <p>WhatsApp : <a href="https://wa.me/{{ $contact->whatsapp }}">
-                        <span class="font-normal">{{ $contact->whatsapp }}</span>
-                    </a>
+                            <span class="font-normal">{{ $contact->whatsapp }}</span>
+                        </a>
                     </p>
-                    <p>Email : <a href="mailto:{{ $contact->email }}"><span class="font-normal">{{ $contact->email }}</span></a></p>
-                    <p>Instagram : <a href="https://www.instagram.com/{{ $contact->instagram }}"><span class="font-normal">{{ $contact->instagram }}</span></a></p>
+                    <p>Email : <a href="mailto:{{ $contact->email }}"><span
+                                class="font-normal">{{ $contact->email }}</span></a></p>
+                    <p>Instagram : <a href="https://www.instagram.com/{{ $contact->instagram }}"><span
+                                class="font-normal">{{ $contact->instagram }}</span></a></p>
                 </div>
             </div>
         </section>

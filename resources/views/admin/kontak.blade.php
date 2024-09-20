@@ -28,7 +28,7 @@
                                     Email
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Ig
+                                    Instagram
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Iframe Maps
@@ -61,7 +61,6 @@
                                         <div class="flex gap-2">
                                             <a href="/admin/editkontak={{ $item->id }}"
                                                 class="bg-green-500 p-1 px-2 rounded-md text-white">Edit</a>
-                                                
                                             <form id="delete-form-{{ $item->id }}"
                                                 action="/deletekontak/{{ $item->id }}" method="POST">
                                                 @csrf

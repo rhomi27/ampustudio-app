@@ -18,7 +18,7 @@ class ViewController extends Controller
         if ($query) {
             $produk = Product::where('name', 'LIKE', '%' . $query . '%')->paginate(6);
         } else {
-            $produk = Product::paginate(6); 
+            $produk = Product::latest()->paginate(6);  
         }
         $contact = Contact::first();
         return view("index", compact('title','produk','contact'));
@@ -38,10 +38,15 @@ class ViewController extends Controller
         return view("transaksi", compact('title','product'));
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $title = 'Dashboard Admin';
-        $transaksi = Transaction::latest()->get();
+        $search = $request->input('search');
+        $transaksi = Transaction::with('product') 
+        ->where('name_customer', 'like', '%' . $search . '%') 
+        ->orWhereHas('product', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->orWhere('created_at', 'like', '%' . $search . '%')->get();
         $labels = $transaksi->pluck('product.name'); // Mengambil nama produk
         $data = $transaksi->pluck('total_biaya');    // Mengambil total biaya
     

@@ -71,7 +71,7 @@
                                 <td>{{ number_format($p->harga, 0, ',', '.') }}</td>
                                 <td>{{ $p->spesifikasi }}</td>
                                 <td>{{ $p->merk }}</td>
-                                <td class="line-clamp-2">{{ $p->deskripsi }}</td>
+                                <td >{{ $p->deskripsi }}</td>
                                 <td>
                                     <div class="flex gap-2">
                                         
@@ -99,6 +99,7 @@
         </div>
     </div>
     @push('script')
+    <script src="{{ asset('js/datatables.js') }}"></script>
         <script src="{{ asset('js/sweetalert.js') }}"></script>
         <script>
             function confirmDelete(id) {

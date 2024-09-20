@@ -7,6 +7,13 @@
             <!-- Canvas for the Chart -->
             <canvas id="myChart" width="400" height="200"></canvas>
 
+            <form action="/admin/dashboard" method="GET" class="sm:w-3/4 w-full sm:px-10 px-4 flex mt-4">
+                @csrf
+                <input type="search" name="search"
+                    class="w-full p-2 px-4 bg-white shadow-md text-sm border outline-none border-blue-300 rounded-s-md focus:border-blue-600"
+                    placeholder="Cari data transaksi" />
+                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-e-md shadow-md">Cari</button>
+            </form>
             <!-- Table for the Sales Data -->
             <table class="min-w-full mt-4 border-collapse">
                 <thead>
@@ -25,7 +32,7 @@
                             <td class="border text-black border-gray-300 p-2">{{ $item->product->name }}</td>
                             <td class="border text-black border-gray-300 p-2">{{ $item->created_at }}</td>
                             <td class="border text-black border-gray-300 p-2">{{ $item->total_biaya }}</td>
-                            <td class="border text-black border-gray-300 p-2"><button
+                            <td class="border text-black border-gray-300 p-2"><button id="detail"
                                     class="bg-blue-500 p-1 px-2 rounded-md text-white">Detail</button></td>
                         </tr>
                     @endforeach
@@ -34,43 +41,54 @@
         </div>
     </div>
 
+@push('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
+<script>
+    
+    $('#detail').click(function(){
+        $('#modal').removeClass('hidden');
+        $('#modal').addClass('flex justify-center')
+    })
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/node_modules/flowbite/dist/flowbite.js"></script>
-    
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-    
-        // Data dari backend
-        var labels = @json($labels); 
-        var data = @json($data);     
-        var myChart = new Chart(ctx, {
-            type: 'bar', 
-            data: {
-                labels: labels, 
-                datasets: [{
-                    label: 'Sales Data',
-                    data: data, 
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(75, 192, 192, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    $('#close-modal').click(function() {
+        $('#modal').removeClass('flex justify-center')
+        $('#modal').addClass('hidden')
+    })
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    // Data dari backend
+    var labels = @json($labels); 
+    var data = @json($data);     
+    var myChart = new Chart(ctx, {
+        type: 'bar', 
+        data: {
+            labels: labels, 
+            datasets: [{
+                label: 'Sales Data',
+                data: data, 
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-    </script>
+        }
+    });
+</script>
+@endpush
+    
 @endsection

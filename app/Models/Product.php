@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
         'spesifikasi',
@@ -20,15 +20,16 @@ class Product extends Model
         'image',
     ];
 
-    protected static function boot(){
+    protected static function boot()
+    {
         parent::boot();
-        static::creating(function($model){
-        $model->kode_produk = $model->kode_produk ?: Uuid::uuid4()->toString();
-       });
+        static::creating(function ($model) {
+            $model->kode_produk = $model->kode_produk ?: Uuid::uuid4()->toString();
+        });
     }
 
     public function transaksi()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class, 'product_id');
     }
 }
