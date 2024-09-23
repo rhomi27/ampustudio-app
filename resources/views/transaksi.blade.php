@@ -72,7 +72,7 @@
                             Penyewa</label>
                         <select id="type-customer" name="type_customer" value="{{ old('type_customer') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Pilih type</option>
+                            <option value="" selected>Pilih type</option>
                             <option value="mahasiswa_umum">Mahasiswa Umum</option>
                             <option value="mahasiswa_praktek">Mahasiswa Praktek</option>
                             <option value="umum">Umum</option>

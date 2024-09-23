@@ -32,8 +32,10 @@
                             <td class="border text-black border-gray-300 p-2">{{ $item->product->name }}</td>
                             <td class="border text-black border-gray-300 p-2">{{ $item->created_at }}</td>
                             <td class="border text-black border-gray-300 p-2">{{ $item->total_biaya }}</td>
-                            <td class="border text-black border-gray-300 p-2"><button id="detail"
-                                    class="bg-blue-500 p-1 px-2 rounded-md text-white">Detail</button></td>
+                            <td class="border text-black border-gray-300 p-2">
+                                <button id="detail" data-id="{{ $item->id }}"
+                                    class="btn-detail bg-blue-500 p-1 px-2 rounded-md text-white">Detail</button>
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -41,54 +43,70 @@
         </div>
     </div>
 
-@push('script')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
-<script>
-    
-    $('#detail').click(function(){
-        $('#modal').removeClass('hidden');
-        $('#modal').addClass('flex justify-center')
-    })
+    @push('script')
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            $('.btn-detail').click(function() {
+                var id = $(this).data('id')
+                    $.ajax({
+                        type: 'GET',
+                        url: '/admin/transaksi/detail/' + id,
+                        dataType: 'json',
+                        success: function(res) {
+                            $('#nama').text(res.data.name_customer)
+                            $('#alamat').text(res.data.address_customer)
+                            $('#nama-produk').text(res.data.product.name)
+                            $('#merk').text(res.data.product.merk)
+                            $('#harga').text(res.data.product.harga)
+                            $('#jumlah').text(res.data.jumlah)
+                            $('#tanggal-sewa').text(res.data.tanggal_sewa)
+                            $('#total-biaya').text(res.data.total_biaya)
+                        }
+                    })
 
-    $('#close-modal').click(function() {
-        $('#modal').removeClass('flex justify-center')
-        $('#modal').addClass('hidden')
-    })
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+                $('#modal').removeClass('hidden');
+                $('#modal').addClass('flex justify-center')
+            })
 
-    // Data dari backend
-    var labels = @json($labels); 
-    var data = @json($data);     
-    var myChart = new Chart(ctx, {
-        type: 'bar', 
-        data: {
-            labels: labels, 
-            datasets: [{
-                label: 'Sales Data',
-                data: data, 
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(75, 192, 192, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+            $('#close-modal').click(function() {
+                $('#modal').removeClass('flex justify-center')
+                $('#modal').addClass('hidden')
+            })
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Data dari backend
+            var labels = @json($labels);
+            var data = @json($data);
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sales Data',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
-            }
-        }
-    });
-</script>
-@endpush
-    
+            });
+        </script>
+    @endpush
 @endsection

@@ -126,7 +126,10 @@
                     <li><strong>Tanggal Sewa:</strong> {{ session('data')['tanggal_sewa'] }}</li>
                     <li><strong>Tanggal Pengembalian:</strong> {{ session('data')['tanggal_kembali'] }}</li>
                     <li><strong>Jumlah:</strong> {{ session('data')['jumlah'] }} unit</li>
-                    <li><strong>Harga Total:</strong> <span id="hargaTotal" class="text-red-500">Rp.
+                    @if (session('harga'))
+                    <li><strong>Harga per unit:</strong> Rp. {{ session('harga') }}</li>
+                    @endif
+                    <li><strong>Total Biaya:</strong> <span id="hargaTotal" class="text-red-500">Rp.
                             {{ session('data')['total_biaya'] }}</span></li>
                 @endif
                 @if (session('durasi'))
@@ -135,20 +138,6 @@
             </ul>
 
             <!-- Diskon Section -->
-            <div id="diskonSection"
-                class="mt-4 p-4 bg-green-100 rounded-md shadow-md border border-green-300 diskon-section">
-                <h3 class="text-lg font-semibold">Diskon</h3>
-                <ul class="mt-2 space-y-2">
-                    @if (session('diskon'))
-                        <li><strong>Diskon:</strong> <span id="diskon">{{ session('diskon') }}00%</span></li>
-                    @endif
-                    @if (session('data'))
-                        <li><strong>Harga Setelah Diskon:</strong> <span id="hargaDiskon" class="text-green-500">
-                                Rp. {{ session('data')['total_biaya'] }}
-                            </span></li>
-                    @endif
-                </ul>
-            </div>
         </div>
 
         <!-- Print Button -->

@@ -84,4 +84,11 @@ class ViewController extends Controller
         $title = 'Edit Kontak';
         return view('admin.kontak-edit', compact('title','contact'));
     }
+
+    public function detailtransaksi($id){
+        $data = Transaction::with('product')->find($id);
+        return response()->json([
+            'data'=> $data
+        ]);
+    }
 }

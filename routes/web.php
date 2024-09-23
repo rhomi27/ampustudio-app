@@ -32,6 +32,7 @@ Route::post('/pesanproduct={product:id}', [TransactionController::class, 'pesan'
 
 Route::middleware('isAuth')->group(function () {
     Route::get('/admin/dashboard', [ViewController::class, 'dashboard']);
+    Route::get('/admin/transaksi/detail/{id}',[ViewController::class,'detailtransaksi']);
 
     Route::get('/admin/dataproduk', [ViewController::class, 'dataproduk']);
     Route::get('/admin/addproduk', [ViewController::class, 'addproduk']);

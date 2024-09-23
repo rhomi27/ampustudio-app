@@ -88,9 +88,10 @@ class TransactionController extends Controller
             Transaction::create($data);
             Alert::success('Berhasil', 'Pesanan telah dibuat');
             return redirect('/hasiltransaksi')->with([
-                'diskon' => $diskon,
+                'harga' => $product->harga,
                 'data' => $data,
                 'durasi' => $selisih
+            
             ]);
 
         }
